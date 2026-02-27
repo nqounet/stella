@@ -2,7 +2,7 @@
   "name": "stella",
   "version": "1.0.0",
   "type": "module",
-  "description": "Stateful Turn-based Execution &amp; LLM Loop Architecture",
+  "description": "Stateful Turn-based Execution & LLM Loop Architecture",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,7 +13,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/nqounet/stella/issues"
   },
@@ -25,6 +25,9 @@
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
-    "dotenv": "^17.3.1"
+    "@iarna/toml": "^2.2.5",
+    "dotenv": "^17.3.1",
+    "openai": "^6.25.0",
+    "toml-patch": "^0.2.3"
   }
 }

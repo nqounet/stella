@@ -1,0 +1,8 @@
+[env]
+
+[tasks.stella]
+run = "npx tsx src/index.ts"
+
+[tasks.debug]
+run = "npx tsx src/index.ts"
+env = { STELLA_DEBUG = "true" }

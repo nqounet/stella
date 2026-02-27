@@ -7,47 +7,47 @@ STELLAは、LLM（大規模言語モデル）を単なる「テキスト生成�
 ## 特徴
 
 - **Inversion of Control**: プログラムがLLMを呼び出すのではなく、LLMがプログラム（ツール）を呼び出し、タスクの完了を自己決定します。
-- **Stateful Loop**: 1つのセッション（1リクエスト）を長時間維持し、試行錯誤と自己修正を繰り返します。
+- **Multi-Provider Support**: Google Gemini, GitHub Models (Azure), OpenAI API をシームレスに切り替えて利用可能です。
+- **Stateful Loop**: 1つのセッションを長時間維持し、試行錯誤と自己修正を繰り返します。
 - **Interactive**: 途中で判断に迷った場合は、自らユーザーに質問（`ask_user`）を投げ、対話的に問題を解決します。
 
-## 現在のステータス
+## 使い方
 
-現在は**「Human-in-the-loop モック」**のフェーズです。
-本物のLLMを接続する前に、人間がLLMのフリをしてJSONを出力することで、制御ループ自体が堅牢に動作するかを検証できます。
-
-## 使い方（モック環境）
+### 1. セットアップ
 
 ```bash
 # 依存関係のインストール
 npm install
 
-# モックループの起動
-npx tsx src/index.ts
+# 環境変数の設定
+cp .env.example .env
+# .env を編集して API キーを設定してください
 ```
 
-起動後、以下のようなJSONを入力して、STELLAに指示を出してください。
+### 2. 起動
 
-**シェルコマンドの実行:**
-```json
-{"tool": "run_shell", "parameters": {"command": "ls -la"}}
+```bash
+# デフォルト（config.tomlの設定）で起動
+npm start
+
+# デバッグモード（APIのやり取りを表示）で起動
+STELLA_DEBUG=true npm start
 ```
 
-**ユーザーへの質問:**
-```json
-{"tool": "ask_user", "parameters": {"query": "次に何をすべきですか？"}}
-```
+### 3. 操作
 
-**セッションの終了:**
-```json
-{"tool": "finish", "parameters": {}}
-```
+起動後、STELLAに自然言語で指示を出してください。STELLAは必要に応じてツールを使用し、結果を報告します。
 
-## ロードマップ
+**利用可能なツール:**
+- `run_shell`: シェルコマンドの実行（ファイル操作、情報収集など）
+- `ask_user`: ユーザーへの質問と回答の待機
+- `list_models`: 利用可能なモデル一覧の取得
+- `switch_model`: モデルやプロバイダーの切り替え（設定は `config.toml` に保存されます）
+- `finish`: セッションの終了
 
-1. [x] モックループの作成（イベントループとツール・ディスパッチャーの実装）
-2. [ ] Gemini API / OpenAI API SDK の導入と Chat Session の接続
-3. [ ] `deba` から Git Worktree などの隔離環境の移植
-4. [ ] バッチ・タスクの自律処理テスト
+## 開発の系譜
+
+STELLAは、自律型エージェントの最小構成（ミニマル・コア）を探求するプロジェクトとして誕生しました。対話型CLIツール開発の強力な雛形として機能します。
 
 ## License
 MIT
