@@ -1,4 +1,8 @@
-# 🌟 STELLA
+<p align="center">
+  <img src="assets/logo.png" width="800" alt="STELLA Logo">
+</p>
+
+# STELLA
 
 **S**tateful **T**urn-based **E**xecution & **L**LM **L**oop **A**rchitecture
 
